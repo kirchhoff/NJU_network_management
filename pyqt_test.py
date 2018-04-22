@@ -118,6 +118,7 @@ class Window(QDialog):
             r = requests.get("http://www.baidu.com")
         except Exception as e:
             print(e)
+            self.iconComboBox.setCurrentIndex(1)
 
         else:
             if r.status_code != 200:
@@ -231,7 +232,10 @@ class Window(QDialog):
             if self.iconComboBox.currentIndex() == 0:
                 print("yes")
                 self.logout()
-                self.MOTIVATION_FLAG = False
+                self.iconComboBox.setCurrentIndex(
+                    (self.iconComboBox.currentIndex() + 1)
+                    % self.iconComboBox.count())
+
             elif self.iconComboBox.currentIndex()==1:
                 print("no")
                 self.name = self.titleEdit.text()
@@ -242,11 +246,11 @@ class Window(QDialog):
                     QMessageBox.critical(None, "通知",
                                          "请检查校园网连接链路的有效性")
                     #sys.exit()
+                else:
 
-
-            self.iconComboBox.setCurrentIndex(
-                    (self.iconComboBox.currentIndex() + 1)
-                    % self.iconComboBox.count())
+                    self.iconComboBox.setCurrentIndex(
+                        (self.iconComboBox.currentIndex() + 1)
+                        % self.iconComboBox.count())
 
         elif reason == QSystemTrayIcon.MiddleClick:
             self.showMessage()
