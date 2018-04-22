@@ -262,7 +262,7 @@ class Window(QDialog):
         print("name",account,"password",password)
 
         self.logout()
-
+        time.sleep(2)
         (responce_code, reply_code) = self.login(account,password)
         print("reply code", reply_code)
         if responce_code == 200:
